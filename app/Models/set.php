@@ -18,6 +18,6 @@ class set extends Model
 
     public function jugador()
     {
-        return $this->belongsTo(Jugador::class);
+        return $this->belongsTo(jugador::class);
     }
 }

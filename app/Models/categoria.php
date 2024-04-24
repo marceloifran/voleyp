@@ -11,11 +11,11 @@ class Categoria extends Model
 
     public function jugadores()
     {
-        return $this->hasMany(Jugador::class);
+        return $this->hasMany(jugador::class);
     }
 
     public function partidos()
     {
-        return $this->hasMany(Partido::class);
+        return $this->hasMany(partido::class);
     }
 }

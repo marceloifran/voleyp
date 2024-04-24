@@ -19,11 +19,11 @@ class partido extends Model
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(categoria::class);
     }
 
     public function sets()
     {
-        return $this->hasMany(Set::class);
+        return $this->hasMany(set::class);
     }
 }
