@@ -13,7 +13,7 @@ return new class extends Migration
             // $table->unsignedBigInteger('partido_id');
             // $table->foreign('partido_id')->references('id')->on('partidos');
             $table->unsignedBigInteger('jugador_id');
-            $table->foreign('jugador_id')->references('id')->on('jugadores');
+            $table->foreign('jugador_id')->references('id')->on('jugadors');
             $table->integer('ataques')->default(0);
             $table->integer('ataques_rojo')->default(0);
             $table->integer('contrataques')->default(0);
