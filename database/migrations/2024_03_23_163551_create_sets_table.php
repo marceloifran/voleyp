@@ -14,17 +14,13 @@ return new class extends Migration
         Schema::create('sets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('partido_id');
+            $table->foreign('partido_id')->references('id')->on('partidos')->onDelete('cascade');
             $table->integer('numero');
-            // Aquí añade las columnas para almacenar los datos específicos de cada set
             $table->integer('ataques');
             $table->integer('ataques_rojo');
             $table->integer('contrataques');
             $table->integer('contrataques_rojo');
-            // Repite el mismo proceso para saques, bloqueos y recepciones...
-
             $table->timestamps();
-
-            $table->foreign('partido_id')->references('id')->on('partidos')->onDelete('cascade');
         });
     }
 
