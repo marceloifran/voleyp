@@ -31,7 +31,12 @@ class JugadorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $jugador = new jugador();
+        $jugador->nombre_completo = $request->nombre_completo;
+        $jugador->posicion = $request->posicion;
+        $jugador->categoria_id = $request->categoria_id;
+        $jugador->save();
+        return redirect()->route('jugadores.index');
     }
 
     /**

@@ -103,6 +103,7 @@
     </div>
 </div>
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
     var sets = []; // Array para almacenar los datos de cada set
@@ -427,43 +428,102 @@ function mostrarContadoresSet(numeroSet) {
     }
 }
 
+function obtenerJugadorSeleccionado() {
+    var jugadorSelect = document.getElementById('jugadorSelect');
+    return jugadorSelect.value; // Aquí asumo que tienes un elemento select con id "jugadorSelect"
+}
+
 function finalizarPartido() {
     // Guardar los datos del último set antes de finalizar el partido
     guardarContadoresSet(numeroSetActual);
 
-    // Verificar que se hayan guardado al menos un set
-    if (sets.length > 0) {
-        // Realizar la solicitud POST al controlador para almacenar los datos del partido
-        fetch('{{ route("partidos.store") }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({
-                fecha: document.querySelector('input[name="fecha"]').value,
-                rival: document.querySelector('input[name="rival"]').value,
-                categoria_id: document.querySelector('select[name="categoria_id"]').value,
-                sets: sets
-            })
-        })
+    // Obtener los datos del formulario
+    var formData = {
+        // jugador_id = obtenerJugadorSeleccionado(),
+        jugador_id:  document.querySelector('select[name="jugador_id"]').value,
+        fecha: document.querySelector('input[name="fecha"]').value,
+        rival: document.querySelector('input[name="rival"]').value,
+        categoria_id: document.querySelector('select[name="categoria_id"]').value,
+        sets: sets
+    };
+
+    // Realizar la solicitud POST al controlador para almacenar los datos del partido
+    axios.post('{{ route("partidos.store") }}', formData)
         .then(response => {
-            if (response.ok) {
-                // Redireccionar a la página de inicio, por ejemplo
+            // Verificar si la solicitud fue exitosa
+            if (response.status === 200) {
+                // Redireccionar a la página de inicio
                 window.location.href = '{{ route("partidos.index") }}';
             } else {
-                // Mostrar un mensaje de error si la solicitud falla
-                // alert('Error al guardar el partido. Por favor, inténtalo de nuevo.');
+                // Mostrar un mensaje de error si la solicitud no fue exitosa
+                console.error('Error al guardar el partido:', response.statusText);
+                alert('Error al guardar el partido. Por favor, inténtalo de nuevo.');
             }
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('error' + error)
-            alert('Error al guardar el partido. Por favor, inténtalo de nuevo.');
+            // Verificar si hay errores de validación
+            if (error.response && error.response.status === 422) {
+                // Acceder a los errores de validación
+                var errors = error.response.data.errors;
+                var errorMessage = '';
+                for (var key in errors) {
+                    errorMessage += errors[key][0] + '\n';
+                }
+                // Mostrar los mensajes de error de validación al usuario
+                alert(errorMessage);
+            } else {
+                // Mostrar un mensaje de error genérico si la respuesta no es un error de validación
+                console.error('Error al guardar el partido:', error);
+                alert('Error al guardar el partido. Por favor, inténtalo de nuevo.');
+            }
         });
-    } else {
-        alert('No se ha guardado ningún set. Por favor, guarda al menos un set antes de finalizar el partido.');
-    }
 }
+
+
+function finalizarPartido() {
+        // Guardar los datos del último set antes de finalizar el partido
+        guardarContadoresSet(numeroSetActual);
+
+        // Obtener los datos del formulario
+        var formData = new FormData();
+        formData.append('fecha', document.querySelector('input[name="fecha"]').value);
+        formData.append('rival', document.querySelector('input[name="rival"]').value);
+        formData.append('categoria_id', document.querySelector('select[name="categoria_id"]').value);
+        formData.append('jugador_id', document.querySelector('select[name="jugador_id"]').value); // Agregar el jugador_id
+        // Agregar los sets al formData
+        formData.append('sets', JSON.stringify(sets));
+
+        // Realizar la solicitud POST al controlador para almacenar los datos del partido
+        axios.post('{{ route("partidos.store") }}', formData)
+            .then(response => {
+                // Verificar si la solicitud fue exitosa
+                if (response.status === 200) {
+                    // Redireccionar a la página de inicio
+                    window.location.href = '{{ route("partidos.index") }}';
+                } else {
+                    // Mostrar un mensaje de error si la solicitud no fue exitosa
+                    console.error('Error al guardar el partido:', response.statusText);
+                    alert('Error al guardar el partido. Por favor, inténtalo de nuevo.');
+                }
+            })
+            .catch(error => {
+                // Verificar si hay errores de validación
+                if (error.response && error.response.status === 422) {
+                    // Acceder a los errores de validación
+                    var errors = error.response.data.errors;
+                    var errorMessage = '';
+                    for (var key in errors) {
+                        errorMessage += errors[key][0] + '\n';
+                    }
+                    // Mostrar los mensajes de error de validación al usuario
+                    alert(errorMessage);
+                } else {
+                    // Mostrar un mensaje de error genérico si la respuesta no es un error de validación
+                    console.error('Error al guardar el partido:', error);
+                    alert('Error al guardar el partido. Por favor, inténtalo de nuevo.');
+                }
+            });
+    }
 </script>
+
 @endsection
