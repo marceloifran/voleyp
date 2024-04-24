@@ -450,15 +450,15 @@ function finalizarPartido() {
         .then(response => {
             if (response.ok) {
                 // Redireccionar a la página de inicio, por ejemplo
-                
                 window.location.href = '{{ route("partidos.index") }}';
             } else {
                 // Mostrar un mensaje de error si la solicitud falla
-                alert('Error al guardar el partido. Por favor, inténtalo de nuevo.');
+                // alert('Error al guardar el partido. Por favor, inténtalo de nuevo.');
             }
         })
         .catch(error => {
             console.error('Error:', error);
+            alert('error' + error)
             alert('Error al guardar el partido. Por favor, inténtalo de nuevo.');
         });
     } else {
