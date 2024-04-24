@@ -15,8 +15,14 @@
                     <x-nav-link style="text-decoration: none" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link style="text-decoration: none" :href="route('entrenamientos.index')" :active="request()->routeIs('entrenamientos.index')">
-                        {{ __('Entrenamientos') }}
+                    <x-nav-link style="text-decoration: none" :href="route('partidos.index')" :active="request()->routeIs('partidos.index')">
+                        {{ __('Partidos') }}
+                    </x-nav-link>
+                    <x-nav-link style="text-decoration: none" :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
+                        {{ __('categorias') }}
+                    </x-nav-link>
+                    <x-nav-link style="text-decoration: none" :href="route('jugadores.index')" :active="request()->routeIs('jugadores.index')">
+                        {{ __('Jugadores') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -72,6 +78,15 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('partidos.index')" :active="request()->routeIs('partidos')">
+                {{ __('Partidos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
+                {{ __('categorias') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('jugadores.index')" :active="request()->routeIs('jugadores.index')">
+                {{ __('Jugadores') }}
             </x-responsive-nav-link>
         </div>
 

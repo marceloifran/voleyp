@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrenamientoController;
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\JugadorController;
+use App\Http\Controllers\PartidoController;
+use App\Models\categoria;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('entrenamientos', App\Http\Controllers\EntrenamientoController::class);
-    Route::get('entrenamientos/{id}/pdf', [EntrenamientoController::class, 'generarPDF' ])->name('entrenamientos.pdf');
+    Route::resource('partidos', PartidoController::class);
+    Route::get('/jugadores-por-categoria/{categoria}', 'App\Http\Controllers\PartidoController@jugadoresPorCategoria');
+
+    Route::resource('categorias', CategoriaController::class);
+    Route::resource('jugadores', JugadorController::class);
+   
 
 
 });
