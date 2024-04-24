@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('jugadors', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_completo');
+            $table->string('posicion');
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
