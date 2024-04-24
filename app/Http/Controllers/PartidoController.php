@@ -104,8 +104,7 @@ public function jugadoresPorCategoria($categoriaId)
                  // Relacionar el set con el partido y guardarlo
                  $partido->sets()->save($set);
              }
-                // Mostrar los datos recibidos antes de guardarlos
-            dd($request->all());
+             dd($partido);
  
              // Redireccionar o responder con algún mensaje de éxito
              return redirect()->route('partidos.index')->with('success', 'Partido creado exitosamente.');

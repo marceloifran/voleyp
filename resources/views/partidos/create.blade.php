@@ -7,7 +7,7 @@
                 <div class="card-header">Crear Partido</div>
 
                 <div class="card-body">
-                    <form id="partidoForm" method="POST" action="{{ route('partidos.store') }}" enctype="multipart/form-data">
+                    <form id="partidoForm" method="POST" action="{{ route('partidos.store') }}  "     enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
@@ -43,7 +43,7 @@
                         <!-- Botón para guardar partido -->
                         <button style="margin-bottom: 10px; margin-left: 5px;" id="guardarPartidoBtn" type="button" class="btn btn-success" onclick="guardarSet()">Guardar Set</button>
                         <!-- Botón para finalizar el partido -->
-<button style="margin-bottom: 10px; margin-left: 5px;" id="finalizarPartidoBtn" type="button" class="btn btn-primary" onclick="finalizarPartido()">Finalizar Partido</button>
+<button style="margin-bottom: 10px; margin-left: 5px;" id="finalizarPartidoBtn" type="submit" class="btn btn-primary" onclick="finalizarPartido()">Finalizar Partido</button>
 
 
                         <!-- Tabla para mostrar los jugadores y las acciones -->
@@ -70,6 +70,16 @@
         </div>
     </div>
 </div>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <!-- Modal de estadísticas -->
 <div class="modal fade" id="estadisticasModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -455,7 +465,5 @@ function finalizarPartido() {
         alert('No se ha guardado ningún set. Por favor, guarda al menos un set antes de finalizar el partido.');
     }
 }
-
-
 </script>
 @endsection

@@ -6,26 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up()
     {
-        Schema::create('partidos', function (Blueprint $table) {
+        Schema::create('sets', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
-            $table->string('rival');
-            $table->unsignedBigInteger('categoria_id');
+            $table->unsignedBigInteger('partido_id');
+            $table->foreign('partido_id')->references('id')->on('partidos');
+            $table->unsignedBigInteger('jugador_id');
+            $table->foreign('jugador_id')->references('id')->on('jugadores');
+            $table->integer('ataques')->default(0);
+            $table->integer('ataques_rojo')->default(0);
+            $table->integer('contrataques')->default(0);
+            $table->integer('contrataques_rojo')->default(0);
+            $table->integer('saques')->default(0);
+            $table->integer('saques_rojo')->default(0);
+            $table->integer('bloqueos')->default(0);
+            $table->integer('bloqueos_rojo')->default(0);
+            $table->json('recepciones');
             $table->timestamps();
-            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('partidos');
+        Schema::dropIfExists('sets');
     }
 };

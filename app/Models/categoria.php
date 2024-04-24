@@ -2,19 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 
-class categoria extends Model
+class Categoria extends Model
 {
-    use HasFactory;
-
-    protected $fillable = [
-        'nombre',
-    ];
+    protected $fillable = ['nombre'];
 
     public function jugadores()
     {
-        return $this->hasMany(jugador::class);
+        return $this->hasMany(Jugador::class);
+    }
+
+    public function partidos()
+    {
+        return $this->hasMany(Partido::class);
     }
 }

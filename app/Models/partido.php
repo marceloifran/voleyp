@@ -17,6 +17,11 @@ class partido extends Model
        
     ];
 
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
+
     public function sets()
     {
         return $this->hasMany(Set::class);
