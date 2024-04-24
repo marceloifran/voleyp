@@ -9,11 +9,11 @@
             <div class="row">
                 @foreach ($categorias as $categoria)
                     <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mt-4 bg-success">
-                            <h3 style="margin-top: 5px;" class="text-white text-center">Categoría # {{ $categoria->id }}</h3>
+                        <div class="card mt-4">
+                            <h3 style="margin-top: 5px;" class=" text-center">Categoría # {{ $categoria->id }}</h3>
                             <div class="card-body">
-                                <h5 class="card-title text-white">Nombre: {{ $categoria->nombre }}</h5>
-                                <h5 class="card-title text-white">Cantidad de jugadores: {{ $categoria->jugadores->count() }}</h5>
+                                <h5 class="card-title ">Nombre: {{ $categoria->nombre }}</h5>
+                                <h5 class="card-title ">Cantidad de jugadores: {{ $categoria->jugadores->count() }}</h5>
                                 {{-- <h5 class="card-title text-white">Descripcion: {{ $categorias->descripcion }}</h5> --}}
                               
                                 <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-warning">Editar</a>

@@ -9,11 +9,11 @@
             <div class="row">
                 @foreach ($partidos as $partido)
                     <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mt-4 bg-success">
+                        <div class="card mt-4 ">
                             <h3 style="margin-top: 5px;" class="text-white text-center">Partido # {{ $partido->id }}</h3>
                             <div class="card-body">
-                                <h5 class="card-title text-white">Rival: {{ $partido->rival }}</h5>
-                                <h5 class="card-title text-white">Fecha: {{ $partido->fecha }}</h5>
+                                <h5 class="card-title ">Rival: {{ $partido->rival }}</h5>
+                                <h5 class="card-title ">Fecha: {{ $partido->fecha }}</h5>
                                 {{-- <a href="{{ route('partidos.pdf', $entrenamiento->id) }}" class="btn btn-primary">Generar PDF</a> --}}
                                 <a href="{{ route('partidos.edit', $partido->id) }}" class="btn btn-warning">Editar</a>
                             </div>
