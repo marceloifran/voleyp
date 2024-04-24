@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('sets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('partido_id');
-            $table->foreign('partido_id')->references('id')->on('partidos');
+            // $table->unsignedBigInteger('partido_id');
+            // $table->foreign('partido_id')->references('id')->on('partidos');
             $table->unsignedBigInteger('jugador_id');
             $table->foreign('jugador_id')->references('id')->on('jugadores');
             $table->integer('ataques')->default(0);
