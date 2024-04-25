@@ -41,6 +41,7 @@ public function jugadoresPorCategoria($categoriaId)
     
      public function store(Request $request)
      {
+        dd($request->all());
          try {
              // Validar los datos del formulario
             //  $request->validate([
@@ -65,6 +66,7 @@ public function jugadoresPorCategoria($categoriaId)
                  'rival' => $request->rival,
                  'categoria_id' => $request->categoria_id,
                  'jugador_id' => $request->jugador_id,
+                 
                  // Agregar más campos aquí si es necesario
              ]);
      
@@ -113,6 +115,45 @@ public function jugadoresPorCategoria($categoriaId)
              return back()->with('error', 'Error al guardar el partido: ' . $e->getMessage())->withInput();
          }
      }
+    // public function store(Request $request)
+    // {
+    //     // Validación de los datos del formulario
+    //     // $request->validate([
+    //     //     'fecha' => 'required|date',
+    //     //     'rival' => 'required|string',
+    //     //     'categoria_id' => 'required|numeric',
+    //     //     'ids_jugadores' => 'required|array', // Validar que ids_jugadores sea un arreglo
+    //     //     'ids_jugadores.*' => 'numeric', // Validar que cada ID de jugador sea numérico
+    //     //     'sets' => 'required|array', // Validar que sets sea un arreglo
+    //     //     'sets.*.numero' => 'required|numeric', // Validar que cada número de set sea numérico
+    //     //     'sets.*.local' => 'required|numeric', // Validar que cada puntaje local sea numérico
+    //     //     'sets.*.visitante' => 'required|numeric', // Validar que cada puntaje visitante sea numérico
+    //     // ]);
+
+    //     // Crear un nuevo partido con los datos del formulario
+    //     $partido = new Partido();
+    //     $partido->fecha = $request->fecha;
+    //     $partido->rival = $request->rival;
+    //     $partido->categoria_id = $request->categoria_id;
+    //     $partido->jugador_id = $request->jugador_id;
+    //     $partido->save();
+
+    //     // Guardar los IDs de los jugadores asociados al partido
+    //     $partido->jugadores()->attach($request->ids_jugadores);
+
+    //     // Guardar la información de los sets del partido
+    //     foreach ($request->sets as $set) {
+    //         $partido->sets()->create([
+    //             'numero' => $set['numero'],
+    //             'local' => $set['local'],
+    //             'visitante' => $set['visitante'],
+    //         ]);
+    //     }
+
+    //     // Redireccionar a la página de inicio o a donde sea necesario
+    //     return redirect()->route('partidos.index')->with('success', 'Partido guardado exitosamente.');
+    // }
+
      
      
     /**
